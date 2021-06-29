@@ -49,8 +49,16 @@ wait(1)
 while run:
   press = False
   pause = False
-  snake = [Rect(40,8,4,4, WHITE), Rect(40,12,4,4, WHITE), Rect(40,16,4,4, WHITE), Rect(40,20,4,4, WHITE), Rect(44,20,4,4, GREEN)]
-  apple = Rect(random.randrange(0, 76, 4), random.randrange(0, 156, 4), 4, 4, RED)
+  snake = [Rect(40,8,4,4, WHITE), Rect(40,12,4,4, WHITE), Rect(40,16,4,4, WHITE), Rect(40,20,4,4, GREEN)]
+  apple = Rect(random.randrange(0, 76, 4), random.randrange(0, 156, 4), 4, 4, RED)  
+  foundSpot = False
+  while not foundSpot:
+    foundSpot = True
+    apple = Rect(random.randrange(0, 76, 4), random.randrange(0, 156, 4), 4, 4, RED)
+    for block in snake:
+      if apple.x == block.x and apple.y == block.y:
+        foundSpot = False
+  
   lcd.print("START", 20, 80, 0xffffff)
   wait(2)
   while run:
@@ -136,7 +144,7 @@ while run:
   lcd.print("GAME", 20, 40, 0xffffff)
   lcd.print("OVER", 20, 60, 0xffffff)
   lcd.print("Score: ", 5, 90, 0xffffff)
-  lcd.print(len(snake)-5, 60, 90, 0xffffff)
+  lcd.print(len(snake)-4, 60, 90, 0xffffff)
   snake = []
   while not press:
     wait_ms(500)
